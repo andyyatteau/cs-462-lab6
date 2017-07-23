@@ -13,7 +13,7 @@ Lab 6
     send_directive("say", {"something":"Hello World"})
   }
   rule message is active {
-    select when echo message input re#(.*)# setting(m);
+    select when echo message input re#(.*)# setting(m)
     send_directive("say", {"something":m})
   }
  
