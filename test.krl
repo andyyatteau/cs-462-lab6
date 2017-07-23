@@ -14,10 +14,6 @@ Lab 6
       msg = "Hello " + obj;
       msg
     }
-    message {
-      msg = "Message: " + obj;
-      msg
-    }
   }
   rule hello is active {
     select when echo hello
