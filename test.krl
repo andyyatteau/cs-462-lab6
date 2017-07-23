@@ -12,7 +12,6 @@ Lab 6
   global {
     hello = function(obj) {
       msg = "Hello " + obj
-      msg
     }
   }
   rule hello is active {
