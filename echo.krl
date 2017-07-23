@@ -7,6 +7,7 @@ Lab 6
     author "Andy Yatteau"
     logging on
     shares hello
+    shares message
   }
   rule hello is active {
     select when echo hello
