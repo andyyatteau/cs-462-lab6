@@ -9,9 +9,9 @@ Lab 6
     shares __testing
   }
   global {
-    __testing = { "queries": [ { "name": "hello", "args": [ "obj" ] },
-                           { "name": "__testing" } ],
-              "events": [ { "domain": "echo", "type": "hello" } ]
+    __testing = { "queries": [ { "name": "__testing" } ],
+              "events": [ { "domain": "echo", "type": "hello" },
+                          { "domain": "echo", "type": "message", "attrs": ["input"] } ]
     }
   }
   rule hello {
@@ -19,8 +19,9 @@ Lab 6
     send_directive("say", {"something":"Hello World"})
   }
   rule message {
-    select when echo message input re#(.*)# setting(m)
-    send_directive("say", {"something":m})
+    select when echo message
+    pre { input = event:attr("input") }
+    send_directive("say", {"something":input})
   }
  
 }
