@@ -1,14 +1,13 @@
-ruleset track_tips {
+ruleset track_trips {
   meta {
-    name "Track Tips"
+    name "Track Trips"
     description <<
 Lab 6
 >>
     author "Andy Yatteau"
     logging on
-    shares message
   }
-  rule process_trip is active {
+  rule process_trip {
     select when echo message mileage re#(.*)# setting(m)
     send_directive("trip", {"length":m})
   }
