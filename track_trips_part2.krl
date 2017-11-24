@@ -16,7 +16,7 @@ Lab 6
     }
   }
   rule process_trip {
-    select when car:new_trip
+    select when car new_trip
     pre { mileage = event:attr("mileage") }
     send_directive("trip", {"length":mileage})
     always {
@@ -26,7 +26,7 @@ Lab 6
   }
 
   rule find_long_trips {
-    select when explicit:trip_processed
+    select when explicit trip_processed
     pre { mileage = event:attr("mileage") }
     always {
       raise explicit event "found_long_trip" attributes {
