@@ -1,4 +1,4 @@
-ruleset track_trips2 {
+ruleset test {
   meta {
     name "Track Trips Part 2"
     description <<
