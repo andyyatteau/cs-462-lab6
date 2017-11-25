@@ -48,7 +48,7 @@ Lab 6
   rule clear_trips {
     select when car trip_reset
     always {
-      clear trips;
-      clear long_trips;
+      clear ent:trips
+      clear ent:long_trips
     }
   }
