@@ -1,53 +1,38 @@
-ruleset trip_store {
+ruleset track_trips2 {
   meta {
-    name "Trip Store"
+    name "Track Trips Part 2"
     description <<
 Lab 6
 >>
     author "Andy Yatteau"
     logging on
-    shares __testing, trips, long_trips, short_trips
-    provides trips, long_trips, short_trips
+    shares __testing
   }
   global {
+    long_trip = "100"
+
     __testing = { "queries": [ { "name": "__testing" } ],
-              "events": [ { "domain": "explicit", "type": "processed_trip", "attrs": ["mileage"] },  
-              { "domain": "explicit", "type": "found_long_trip", "attrs": ["mileage"] },
-              { "domain": "car", "type": "trip_reset" } ]
-            }
-
-    trips = function() {
-      trips
+              "events": [ { "domain": "car", "type": "new_trip", "attrs": ["mileage"] } ]
     }
-    
-    long_trips = function() {
-      long_trips
-    }
-    
-    short_trips = function() {
-      trips - long_trips
+  }
+  rule process_trip {
+    select when car new_trip
+    pre { mileage = event:attr("mileage") }
+    send_directive("trip", {"length":mileage})
+    always {
+      raise explicit event "trip_processed"
+        attributes event:attrs()
     }
   }
 
-  rule collect_trips {
-    select when explicit processed_trip
+  rule find_long_trips {
+    select when explicit trip_processed
     pre { mileage = event:attr("mileage") }
     always {
-      ent:trips := ent:trips.put(mileage).put(time_stamp)
+      raise explicit event "found_long_trip" attributes {
+        "mileage": mileage
+      } if (mileage > long_trip);
     }
   }
-
-  rule collect_long_trips {
-    select when explicit found_long_trip
-    pre { mileage = event:attr("mileage") }
-    always {
-      ent:long_trips := ent:long_trips.put(mileage).put(time_stamp)
-    }
-  }
-
-  rule clear_trips {
-    select when car trip_reset
-    always {
-      clear trips
-    }
-  }
+ 
+}
