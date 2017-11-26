@@ -11,12 +11,12 @@ Lab 6
   global {
     __testing = { "queries": [ { "name": "__testing" } ],
               "events": [ { "domain": "echo", "type": "hello" },
-                          { "domain": "echo", "type": "message", "attrs": ["input"] } ]
+                          { "domain": "echo", "type": "message", "attrs": ["mileage"] } ]
     }
   }
   rule process_trip {
     select when echo message
-    pre { input = event:attr("mileage") }
+    pre { mileage = event:attr("mileage") }
     send_directive("trip", {"length":mileage})
   }
  
