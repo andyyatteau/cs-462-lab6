@@ -9,7 +9,7 @@ Lab 6
     shares __testing
   }
   global {
-    long_trip = "100"
+    long_trip = 100
 
     __testing = { "queries": [ { "name": "__testing" } ],
               "events": [ { "domain": "car", "type": "new_trip", "attrs": ["mileage"] } ]
