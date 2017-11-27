@@ -24,7 +24,13 @@ Lab 6
             ent:long_trips
         }
     short_trips = function() {
-      ent:trips.difference(ent:long_trips);
+      trips = ent:trips.map(function(x) {
+        x{"mileage"}
+      });
+      long_trips = ent:long_trips.map(function(x) {
+        x{"mileage"}
+      });
+      trips.difference(long_trips);
     }
   }
 
