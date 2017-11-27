@@ -29,7 +29,7 @@ Lab 6
   }
 
   rule collect_trips {
-    select when explicit processed_trip
+    select when explicit trip_processed
     pre {
       mileage = event:attr("mileage");
       trips = ent:trips || [];
