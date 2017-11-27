@@ -12,7 +12,7 @@ Lab 6
 
   global {
             __testing = { "queries": [ { "name": "__testing" }, { "name": "trips" }, { "name": "long_trips" }, { "name": "short_trips" } ],
-              "events": [ { "domain": "explicit", "type": "processed_trip", "attrs": ["mileage"] },  
+              "events": [ { "domain": "explicit", "type": "trip_processed", "attrs": ["mileage"] },  
               { "domain": "explicit", "type": "found_long_trip", "attrs": ["mileage"] },
               { "domain": "car", "type": "trip_reset" } ]
             }
